@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from "phaser";
  
 export default class GameScene extends Phaser.Scene {
   constructor () {
@@ -13,4 +13,4 @@ export default class GameScene extends Phaser.Scene {
   create () {
     this.add.image(400, 300, 'logo');
   }
-};
+}
