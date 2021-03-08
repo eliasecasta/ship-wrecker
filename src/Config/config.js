@@ -6,4 +6,12 @@ export default {
   width: 800,
   height: 600,
   autoCenter: true,
+  physics: {
+    default: "arcade",
+    arcade: {
+      gravity: { x: 0, y: 0 },
+    },
+  },
+  pixelArt: true,
+  roundPixels: true,
 };
