@@ -1,8 +1,9 @@
 import Phaser from "phaser";
- 
+
 export default {
   type: Phaser.AUTO,
-  parent: 'phaser-example',
+  parent: "phaser-example",
   width: 800,
-  height: 600
+  height: 600,
+  autoCenter: true,
 };
