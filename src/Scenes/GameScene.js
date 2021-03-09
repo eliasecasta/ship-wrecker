@@ -1,5 +1,11 @@
 import Phaser from "phaser";
-import { Player, ChaserShip, GunShip, CarrierShip } from "../Entities";
+import {
+  Player,
+  ChaserShip,
+  GunShip,
+  CarrierShip,
+  ScrollingBackground,
+} from "../Entities";
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -75,6 +81,12 @@ export default class GameScene extends Phaser.Scene {
       laser: this.sound.add("sndLaser"),
     };
 
+    this.backgrounds = [];
+    for (let i = 0; i < 5; i++) {
+      let bg = new ScrollingBackground(this, "sprBg0", i * 10);
+      this.backgrounds.push(bg);
+    }
+
     this.player = new Player(
       this,
       this.game.config.width * 0.5,
@@ -96,7 +108,7 @@ export default class GameScene extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay: 1000,
+      delay: 750,
       callback: function () {
         let enemy = null;
 
@@ -241,6 +253,10 @@ export default class GameScene extends Phaser.Scene {
           laser.destroy();
         }
       }
+    }
+
+    for (var i = 0; i < this.backgrounds.length; i++) {
+      this.backgrounds[i].update();
     }
   }
   getEnemiesByType(type) {

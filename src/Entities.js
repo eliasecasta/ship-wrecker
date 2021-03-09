@@ -13,8 +13,8 @@ class Entity extends Phaser.GameObjects.Sprite {
 
   explode(canDestroy) {
     if (!this.getData("isDead")) {
-      this.setTexture("sprExplosion"); 
-      this.play("sprExplosion"); 
+      this.setTexture("sprExplosion");
+      this.play("sprExplosion");
 
       this.scene.sfx.explosions[
         Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)
@@ -181,4 +181,47 @@ class CarrierShip extends Entity {
   }
 }
 
-export { Player, ChaserShip, GunShip, CarrierShip, EnemyLaser, PlayerLaser };
+class ScrollingBackground {
+  constructor(scene, key, velocityY) {
+    this.scene = scene;
+    this.key = key;
+    this.velocityY = velocityY;
+    this.layers = this.scene.add.group();
+    this.createLayers();
+  }
+
+  createLayers() {
+    for (let i = 0; i < 2; i++) {
+      let layer = this.scene.add.sprite(0, 0, this.key);
+      layer.y = layer.displayHeight * i;
+      layer.x = layer.displayWidth * i;
+      let flipX = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
+      let flipY = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
+      layer.setScale(flipX * 2, flipY * 2);
+      layer.setDepth(-5 - (i - 1));
+      this.scene.physics.world.enableBody(layer, 0);
+      layer.body.velocity.y = this.velocityY;
+
+      this.layers.add(layer);
+    }
+  }
+
+  update() {
+    if (this.layers.getChildren()[0].y > 0) {
+      for (let i = 0; i < this.layers.getChildren().length; i++) {
+        let layer = this.layers.getChildren()[i];
+        layer.y = -layer.displayHeight + layer.displayHeight * i;
+      }
+    }
+  }
+}
+
+export {
+  Player,
+  ChaserShip,
+  GunShip,
+  CarrierShip,
+  EnemyLaser,
+  PlayerLaser,
+  ScrollingBackground,
+};
