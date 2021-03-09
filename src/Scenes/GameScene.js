@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { Player, GunShip, ChaserShip, CarrierShip } from "../Entities";
+import { Player, ChaserShip, GunShip, CarrierShip } from "../Entities";
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -145,6 +145,16 @@ export default class GameScene extends Phaser.Scene {
       this.player.moveLeft();
     } else if (this.keyD.isDown) {
       this.player.moveRight();
+    }
+
+    if (this.keySpace.isDown) {
+      this.player.setData("isShooting", true);
+    } else {
+      this.player.setData(
+        "timerShootTick",
+        this.player.getData("timerShootDelay") - 1
+      );
+      this.player.setData("isShooting", false);
     }
 
     for (var i = 0; i < this.enemies.getChildren().length; i++) {
