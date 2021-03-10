@@ -14,8 +14,8 @@ export default class GameScene extends Phaser.Scene {
 
   preload() {
     // load images
-    this.load.image("sprBg0", "/src/assets/sprBg0.png");
-    this.load.image("sprBg1", "/src/assets/sprBg1.png");
+    // this.load.image("sprBg0", "/src/assets/sprBg0.png");
+    // this.load.image("sprBg1", "/src/assets/sprBg1.png");
     this.load.spritesheet("sprExplosion", "/src/assets/sprExplosion.png", {
       frameWidth: 32,
       frameHeight: 32,
