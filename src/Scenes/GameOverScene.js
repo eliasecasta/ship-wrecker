@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import Button from "../Objects/Button";
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -16,5 +17,25 @@ export default class SceneGameOver extends Phaser.Scene {
       align: "center",
     });
     this.title.setOrigin(0.5);
+
+    this.btnRestart = new Button(
+      this,
+      this.game.config.width / 2,
+      this.game.config.height / 2 - 100,
+      "blueButton1",
+      "blueButton2",
+      "Restart",
+      "Game"
+    );
+
+    this.btnMenu = new Button(
+      this,
+      this.game.config.width / 2,
+      this.game.config.height / 2,
+      "blueButton1",
+      "blueButton2",
+      "Main Menu",
+      "Title"
+    );
   }
 }
