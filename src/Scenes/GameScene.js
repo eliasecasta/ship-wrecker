@@ -93,7 +93,6 @@ export default class GameScene extends Phaser.Scene {
       this.game.config.height * 0.5,
       "sprPlayer"
     );
-    console.log(this.player);
 
     this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
     this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
