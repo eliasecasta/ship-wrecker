@@ -37,5 +37,8 @@ export default class SceneGameOver extends Phaser.Scene {
       "Main Menu",
       "Title"
     );
+
+    let score2 = localStorage.getItem("playerScore");
+    console.log(`Final Score: ${score2}`);
   }
 }

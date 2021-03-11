@@ -6,6 +6,7 @@ import {
   CarrierShip,
   ScrollingBackground,
 } from "../Entities";
+import $ from "jquery";
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -160,6 +161,7 @@ export default class GameScene extends Phaser.Scene {
           }
           enemy.explode(true);
           playerLaser.destroy();
+
           score += 10;
           scoreText.setText("Score: " + score);
         }
@@ -174,6 +176,9 @@ export default class GameScene extends Phaser.Scene {
           player.explode(false);
           player.onDestroy();
           enemy.explode(true);
+
+          localStorage.setItem("playerScore", score);
+
         }
       }
     );
@@ -186,6 +191,9 @@ export default class GameScene extends Phaser.Scene {
           player.explode(false);
           player.onDestroy();
           laser.destroy();
+
+          localStorage.setItem("playerScore", score);
+
         }
       }
     );
