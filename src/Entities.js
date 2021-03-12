@@ -95,7 +95,14 @@ class Player extends Entity {
       // go to game over scene
       delay: 1000,
       callback: function () {
-        this.scene.scene.start("GameOver");
+        // this.scene.scene.start("GameOver");
+        // this.scene.scene.pause().launch("GameOver");
+        // this.scene.scene.switch("GameOver");
+        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
+        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
+        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S, false);
+        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D, false);
+        this.scene.scene.stop().launch("GameOver");
       },
       callbackScope: this,
       loop: false,

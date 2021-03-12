@@ -14,4 +14,5 @@ export default {
   },
   pixelArt: true,
   roundPixels: true,
+  dom: { createContainer: true },
 };

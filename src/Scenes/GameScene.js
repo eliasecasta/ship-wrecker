@@ -95,12 +95,25 @@ export default class GameScene extends Phaser.Scene {
       "sprPlayer"
     );
 
-    this.keyW = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-    this.keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-    this.keyA = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-    this.keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+    this.keyW = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.W,
+      false
+    );
+    this.keyS = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.S,
+      false
+    );
+    this.keyA = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.A,
+      false
+    );
+    this.keyD = this.input.keyboard.addKey(
+      Phaser.Input.Keyboard.KeyCodes.D,
+      false
+    );
     this.keySpace = this.input.keyboard.addKey(
-      Phaser.Input.Keyboard.KeyCodes.SPACE
+      Phaser.Input.Keyboard.KeyCodes.SPACE,
+      false
     );
 
     this.enemies = this.add.group();
@@ -174,11 +187,12 @@ export default class GameScene extends Phaser.Scene {
       function (player, enemy) {
         if (!player.getData("isDead") && !enemy.getData("isDead")) {
           player.explode(false);
+
           player.onDestroy();
+
           enemy.explode(true);
 
           localStorage.setItem("playerScore", score);
-
         }
       }
     );
@@ -193,7 +207,6 @@ export default class GameScene extends Phaser.Scene {
           laser.destroy();
 
           localStorage.setItem("playerScore", score);
-
         }
       }
     );
