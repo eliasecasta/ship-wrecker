@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Button from "../Objects/Button";
 import { setScore } from "../Config/scoresApi";
+import $ from "jquery";
 
 export default class SceneGameOver extends Phaser.Scene {
   constructor() {
@@ -79,8 +80,10 @@ export default class SceneGameOver extends Phaser.Scene {
 
     function check(event) {
       if (event.target.name === "submitButton") {
-        const inputText = playerNameForm.node.firstChild;
-        let inputStyle = playerNameForm.node.firstChild.style;
+        console.log($(".nameField").get(0));
+        const inputText = $(".nameField").get(0);
+        console.log(inputText);
+        let inputStyle = $(".nameField").get(0).style;
 
         if (
           inputText.value !== "" &&
@@ -92,7 +95,7 @@ export default class SceneGameOver extends Phaser.Scene {
           console.log(inputText.value);
 
           let playerScore = localStorage.getItem("playerScore");
-          playerScore = parseInt(playerScore)
+          playerScore = parseInt(playerScore);
 
           const playerNameScore = {
             user: inputText.value,
