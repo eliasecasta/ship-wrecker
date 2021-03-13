@@ -12,36 +12,7 @@ export default class GameScene extends Phaser.Scene {
     super("Game");
   }
 
-  preload() {
-    // load images
-
-    // this.load.spritesheet("sprExplosion", "/src/assets/sprExplosion.png", {
-    //   frameWidth: 32,
-    //   frameHeight: 32,
-    // });
-
-    // this.load.spritesheet("sprEnemy0", "/src/assets/sprEnemy0.png", {
-    //   frameWidth: 16,
-    //   frameHeight: 16,
-    // });
-
-    // this.load.image("sprEnemy1", "/src/assets/sprEnemy1.png");
-    // this.load.spritesheet("sprEnemy2", "/src/assets/sprEnemy2.png", {
-    //   frameWidth: 16,
-    //   frameHeight: 16,
-    // });
-
-    // this.load.image("sprLaserEnemy0", "/src/assets/sprLaserEnemy0.png");
-    // this.load.image("sprLaserPlayer", "/src/assets/sprLaserPlayer.png");
-    // this.load.spritesheet("sprPlayer", "/src/assets/sprPlayer.png", {
-    //   frameWidth: 16,
-    //   frameHeight: 16,
-    // });
-
-    // this.load.audio("sndExplode0", "/src/assets/sndExplode0.wav");
-    // this.load.audio("sndExplode1", "/src/assets/sndExplode1.wav");
-    // this.load.audio("sndLaser", "/src/assets/sndLaser.wav");
-  }
+  preload() {}
 
   create() {
     this.anims.create({
@@ -121,7 +92,7 @@ export default class GameScene extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay: 750,
+      delay: 250,
       callback: function () {
         let enemy = null;
 
@@ -132,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
             0
           );
         } else if (Phaser.Math.Between(0, 10) >= 5) {
-          if (this.getEnemiesByType("ChaserShip").length < 5) {
+          if (this.getEnemiesByType("ChaserShip").length < 7) {
             enemy = new ChaserShip(
               this,
               Phaser.Math.Between(0, this.game.config.width),
@@ -148,7 +119,13 @@ export default class GameScene extends Phaser.Scene {
         }
 
         if (enemy !== null) {
-          enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          if (enemy.getData("type") === "ChaserShip") {
+            // console.log(enemy.getData("type"));
+            enemy.setScale(Phaser.Math.Between(3, 4) * 0.1);
+          } else {
+            enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+          }
+
           this.enemies.add(enemy);
         }
       },
