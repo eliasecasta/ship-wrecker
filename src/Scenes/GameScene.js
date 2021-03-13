@@ -6,7 +6,6 @@ import {
   CarrierShip,
   ScrollingBackground,
 } from "../Entities";
-import $ from "jquery";
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
@@ -84,7 +83,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.backgrounds = [];
     for (let i = 0; i < 5; i++) {
-      let bg = new ScrollingBackground(this, "sprBg0", i * 10);
+      let keys = ["sprBg0", "sprBg1"];
+      let key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      let bg = new ScrollingBackground(this, key, i * 10);
       this.backgrounds.push(bg);
     }
 

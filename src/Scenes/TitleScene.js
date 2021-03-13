@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import config from "../Config/config";
 import Button from "../Objects/Button";
-import {ScrollingBackground} from "../Entities";
+import { ScrollingBackground } from "../Entities";
 
 export default class TitleScene extends Phaser.Scene {
   constructor() {
@@ -9,8 +9,7 @@ export default class TitleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("sprBg0", "/src/assets/sprBg0.png");
-    this.load.image("sprBg1", "/src/assets/sprBg1.png");
+
   }
 
   create() {
@@ -19,7 +18,7 @@ export default class TitleScene extends Phaser.Scene {
       90,
       "SHIP WRECKER",
       {
-        fontFamily: "comic sans",
+        fontFamily: "monospace",
         fontSize: 48,
         fontStyle: "bold",
         color: "#ffffff",
@@ -51,11 +50,22 @@ export default class TitleScene extends Phaser.Scene {
       "Options"
     );
 
-    // Credits
+    // Leaderboard
     this.creditsButton = new Button(
       this,
       config.width / 2,
       config.height / 2 + 100,
+      "blueButton1",
+      "blueButton2",
+      "Scores",
+      "Leaderboard"
+    );
+
+    // Credits
+    this.creditsButton = new Button(
+      this,
+      config.width / 2,
+      config.height / 2 + 200,
       "blueButton1",
       "blueButton2",
       "Credits",

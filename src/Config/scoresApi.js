@@ -1,5 +1,3 @@
-import $ from "jquery";
-// import regeneratorRuntime from "regenerator-runtime";
 import "regenerator-runtime/runtime.js";
 
 // export function getScores() {
@@ -37,7 +35,7 @@ export const getScores = async () => {
     leaderboard = await response.json();
   }
 
-  return leaderboard;
+  return leaderboard.result;
 };
 
 export const setScore = async (playerNameScore) => {
