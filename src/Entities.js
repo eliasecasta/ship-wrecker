@@ -210,10 +210,10 @@ class ScrollingBackground {
   }
 
   createLayers() {
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < 3; i++) {
       let layer = this.scene.add.sprite(0, 0, this.key);
       layer.y = layer.displayHeight * i;
-      layer.x = layer.displayWidth * i;
+      layer.x = 300;
       let flipX = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
       let flipY = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
       layer.setScale(flipX * 2, flipY * 2);

@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import config from "../Config/config";
+import { ScrollingBackground } from "../Entities";
 
 export default class CreditsScene extends Phaser.Scene {
   constructor() {
@@ -9,6 +10,13 @@ export default class CreditsScene extends Phaser.Scene {
   preload() {}
 
   create() {
+    this.backgrounds = [];
+    for (let i = 0; i < 5; i++) {
+      let keys = ["sprBg0", "sprBg1"];
+      let key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      let bg = new ScrollingBackground(this, key, i * 10);
+      this.backgrounds.push(bg);
+    }
     this.creditsText = this.add.text(0, 0, "Credits", {
       fontSize: "32px",
       fill: "#fff",

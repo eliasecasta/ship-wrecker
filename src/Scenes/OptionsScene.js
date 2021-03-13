@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Button from "../Objects/Button";
+import { ScrollingBackground } from "../Entities";
 
 export default class OptionsScene extends Phaser.Scene {
   constructor() {
@@ -7,6 +8,14 @@ export default class OptionsScene extends Phaser.Scene {
   }
 
   create() {
+    this.backgrounds = [];
+    for (let i = 0; i < 5; i++) {
+      let keys = ["sprBg0", "sprBg1"];
+      let key = keys[Phaser.Math.Between(0, keys.length - 1)];
+      let bg = new ScrollingBackground(this, key, i * 10);
+      this.backgrounds.push(bg);
+    }
+    
     this.model = this.sys.game.globals.model;
 
     this.text = this.add.text(300, 100, "Options", { fontSize: 40 });

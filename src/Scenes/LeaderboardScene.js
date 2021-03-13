@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import config from "../Config/config";
 import { getScores } from "../Config/scoresApi";
 import Button from "../Objects/Button";
+import { ScrollingBackground } from "../Entities";
 
 export default class LeaderboardScene extends Phaser.Scene {
   constructor() {
@@ -12,6 +13,14 @@ export default class LeaderboardScene extends Phaser.Scene {
 
   create() {
     (async () => {
+      this.backgrounds = [];
+      for (let i = 0; i < 5; i++) {
+        let keys = ["sprBg0", "sprBg1"];
+        let key = keys[Phaser.Math.Between(0, keys.length - 1)];
+        let bg = new ScrollingBackground(this, key, i * 10);
+        this.backgrounds.push(bg);
+      }
+
       this.title = this.add.text(
         config.width / 2,
         config.height / 2 - 250,
@@ -21,6 +30,7 @@ export default class LeaderboardScene extends Phaser.Scene {
           fontFamily: "monospace",
         }
       );
+
       this.title.setOrigin(0.5);
       let completeLeaderboard = await getScores();
       console.log(completeLeaderboard);
@@ -33,7 +43,7 @@ export default class LeaderboardScene extends Phaser.Scene {
         this.add
           .text(
             config.width / 2,
-            (config.height / 2 -250 ) * (index +3),
+            (config.height / 2 - 250) * (index + 3),
             `#${index + 1}:  ${element.user}  ${element.score}`,
             {
               fontSize: 25,
