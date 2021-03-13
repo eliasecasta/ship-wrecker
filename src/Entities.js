@@ -166,14 +166,15 @@ class ChaserShip extends Entity {
 
 class GunShip extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy0", "GunShip");
+    super(scene, x, y, "bigShip1", "GunShip");
     this.body.velocity.y = Phaser.Math.Between(50, 100);
 
     this.shootTimer = this.scene.time.addEvent({
       delay: 1000,
       callback: function () {
         let laser = new EnemyLaser(this.scene, this.x, this.y);
-        laser.setScale(this.scaleX);
+        laser.setScale(Phaser.Math.Between(1.2, 2));
+        // console.log(this.scaleX);
         this.scene.enemyLasers.add(laser);
       },
       callbackScope: this,

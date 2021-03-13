@@ -117,6 +117,25 @@ export default class PreloaderScene extends Phaser.Scene {
     this.load.audio("sndExplode0", "/src/assets/sndExplode0.wav");
     this.load.audio("sndExplode1", "/src/assets/sndExplode1.wav");
     this.load.audio("sndLaser", "/src/assets/sndLaser.wav");
+
+    this.load.image(
+      "bigShip1",
+      "/src/assets/BigShip1.png"
+      , {
+        frameWidth: 1,
+        frameHeight: 1,}
+    );
+    this.load.image(
+      "bigShip2",
+      "/src/assets/BigShip2.png"
+      , {
+        frameWidth: 1,
+        frameHeight: 1,}
+    );
+    // this.load.image("BigShip2", "/src/assets/BigShip2.png", {
+    //   frameWidth: 1,
+    //   frameHeight: 1,
+    // });
   }
 
   ready() {
