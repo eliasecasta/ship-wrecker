@@ -95,13 +95,6 @@ class Player extends Entity {
       // go to game over scene
       delay: 1000,
       callback: function () {
-        // this.scene.scene.start("GameOver");
-        // this.scene.scene.pause().launch("GameOver");
-        // this.scene.scene.switch("GameOver");
-        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A, false);
-        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W, false);
-        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S, false);
-        // this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D, false);
         this.scene.scene.stop().launch("GameOver");
       },
       callbackScope: this,
@@ -174,7 +167,6 @@ class GunShip extends Entity {
       callback: function () {
         let laser = new EnemyLaser(this.scene, this.x, this.y);
         laser.setScale(Phaser.Math.Between(1.2, 2));
-        // console.log(this.scaleX);
         this.scene.enemyLasers.add(laser);
       },
       callbackScope: this,
@@ -195,7 +187,7 @@ class GunShip extends Entity {
 
 class CarrierShip extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy2", "CarrierShip");
+    super(scene, x, y, "carrier1", "CarrierShip");
     this.body.velocity.y = Phaser.Math.Between(50, 100);
     this.play("sprEnemy2");
   }

@@ -1,18 +1,5 @@
 import "regenerator-runtime/runtime.js";
 
-// export function getScores() {
-// let settings = {
-//   url:
-//     "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores",
-//   method: "GET",
-//   timeout: 0,
-// };
-
-// $.ajax(settings).done(function (response) {
-//     console.log(response);
-// });
-// }
-
 export const getScores = async () => {
   let API =
     "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores";

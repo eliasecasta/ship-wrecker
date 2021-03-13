@@ -17,7 +17,6 @@ export default class GameScene extends Phaser.Scene {
   create() {
     this.anims.create({
       key: "sprEnemy0",
-      // frames: this.anims.generateFrameNumbers("sprEnemy0"),
       frames: [
         { key: "bigShip1", frame: null },
         { key: "bigShip2", frame: null },
@@ -29,7 +28,10 @@ export default class GameScene extends Phaser.Scene {
 
     this.anims.create({
       key: "sprEnemy2",
-      frames: this.anims.generateFrameNumbers("sprEnemy2"),
+      frames: [
+        { key: "carrier1", frame: null },
+        { key: "carrier2", frame: null },
+      ],
       frameRate: 20,
       repeat: -1,
     });
@@ -125,12 +127,11 @@ export default class GameScene extends Phaser.Scene {
 
         if (enemy !== null) {
           if (enemy.getData("type") === "ChaserShip") {
-            // console.log(enemy.getData("type"));
             enemy.setScale(Phaser.Math.Between(3, 4) * 0.1);
           } else if (enemy.getData("type") === "GunShip") {
-            enemy.setScale(Phaser.Math.Between(5, 10 ) * 0.01);
+            enemy.setScale(Phaser.Math.Between(5, 10) * 0.01);
           } else {
-            enemy.setScale(Phaser.Math.Between(10, 20) * 0.1);
+            enemy.setScale(Phaser.Math.Between(20, 40) * 0.01);
           }
 
           this.enemies.add(enemy);

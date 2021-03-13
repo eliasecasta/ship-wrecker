@@ -50,7 +50,6 @@ export default class SceneGameOver extends Phaser.Scene {
 
     const userScore = localStorage.getItem("playerScore");
 
-    console.log(`Final Score: ${userScore}`);
 
     this.text = this.add.text(
       this.game.config.width / 2,
@@ -66,15 +65,6 @@ export default class SceneGameOver extends Phaser.Scene {
     );
     this.text.setOrigin(0.5);
 
-    // Use this for leaderboard scores
-    // const initAPI = async () => {
-    //   let scores = await getScores();
-    //   return scores.result;
-    // };
-
-    // let scores = initAPI();
-    // console.log(scores[0]);
-
     const playerNameForm = this.add.dom(400, 400).createFromCache("nameForm");
 
     playerNameForm.addListener("click");
@@ -88,9 +78,7 @@ export default class SceneGameOver extends Phaser.Scene {
 
     function check(event) {
       if (event.target.name === "submitButton") {
-        console.log($(".nameField").get(0));
         const inputText = $(".nameField").get(0);
-        console.log(inputText);
         let inputStyle = $(".nameField").get(0).style;
 
         if (
@@ -100,7 +88,6 @@ export default class SceneGameOver extends Phaser.Scene {
         ) {
           playerNameForm.removeListener("click");
           playerNameForm.visible = false;
-          console.log(inputText.value);
 
           let playerScore = localStorage.getItem("playerScore");
           playerScore = parseInt(playerScore);
