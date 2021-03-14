@@ -1,5 +1,6 @@
-import {APIString} from "../Config/apiString";
+import { APIString } from "../Config/apiString";
 import "regenerator-runtime/runtime.js";
+import fetch from "node-fetch";
 
 export const getScores = async () => {
   let API = APIString;
