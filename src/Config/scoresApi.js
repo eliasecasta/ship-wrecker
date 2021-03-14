@@ -1,4 +1,4 @@
-import APIString from "../Config/apiString";
+import {APIString} from "../Config/apiString";
 import "regenerator-runtime/runtime.js";
 
 export const getScores = async () => {
@@ -6,7 +6,6 @@ export const getScores = async () => {
 
   let response = "";
   let leaderboard;
-
   try {
     response = await fetch(API);
 
