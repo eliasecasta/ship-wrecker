@@ -15,7 +15,7 @@ describe("Array", function () {
       expect(result[0]).to.deep.equal(undefined);
     });
 
-    it("Get public API Scores", async () => {
+    it("A valid score should be sent succesfully", async () => {
       const score = { user: "e71az", score: 30 };
       const result = await setScore(score);
 
