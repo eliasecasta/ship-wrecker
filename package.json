@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack/prod.js ",
     "start": "webpack-dev-server --config webpack/base.js --open",
-    "test": "mocha src/test/test.js --require esm"
+    "test": "mocha src/test/apiTests.js --require esm"
   },
   "repository": {
     "type": "git",
