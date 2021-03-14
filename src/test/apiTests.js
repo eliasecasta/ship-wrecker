@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 var expect = require("chai").expect;
 import { getScores, setScore } from "../Config/scoresApi";
 
@@ -25,3 +27,5 @@ describe("Array", function () {
     });
   });
 });
+
+/* eslint-enable no-undef */
