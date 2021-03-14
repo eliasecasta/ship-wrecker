@@ -1,8 +1,8 @@
+import APIString from "../Config/apiString";
 import "regenerator-runtime/runtime.js";
 
 export const getScores = async () => {
-  let API =
-    "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores";
+  let API = APIString;
 
   let response = "";
   let leaderboard;
@@ -16,8 +16,7 @@ export const getScores = async () => {
 
     leaderboard = await response.json();
   } catch (error) {
-    API =
-      "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores";
+    API = APIString;
     response = await fetch(API);
     leaderboard = await response.json();
   }
@@ -26,9 +25,7 @@ export const getScores = async () => {
 };
 
 export const setScore = async (playerNameScore) => {
-  let API =
-    "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores";
-
+  let API = APIString;
   let response = "";
   let leaderboard;
 
@@ -36,7 +33,7 @@ export const setScore = async (playerNameScore) => {
     method: "POST",
     body: JSON.stringify(playerNameScore),
     headers: {
-      'Accept': "application/json",
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
   };
@@ -50,8 +47,7 @@ export const setScore = async (playerNameScore) => {
 
     leaderboard = await response.json();
   } catch (error) {
-    API =
-      "https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/xqMJNqqBSt2kP4jkYOVq/scores";
+    API = APIString;
     response = await fetch(API);
     leaderboard = await response.json();
   }
