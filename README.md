@@ -33,7 +33,6 @@
 
   - [Screenshots](#screenshots)
   - [Demo Link](#demo-link)
-  - [Video Explanation](#video-explanation)
   - [Assets Credits](#assets-credits)
   - [Controls](#controls)
   - [Prerequisites](#prerequisites)
@@ -62,10 +61,6 @@ This is the **Ship Wrecker** Capstone project where users are able to fight for 
 ## Demo Link
 
 [Live Demo Link](https://ship-wrecker.netlify.app/).
-
-## Video Explanation
-
-[Demo Video](https://www.loom.com/share/5d88bff6fbe043b4b9742282c184c936).
 
 ## Assets Credits
 
