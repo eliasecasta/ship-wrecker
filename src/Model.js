@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 export default class Model {
   constructor() {
     this._soundOn = true;
@@ -22,11 +23,12 @@ export default class Model {
   }
 
   set bgMusicPlaying(value) {
-      this._bgMusicPlaying = value;
+    this._bgMusicPlaying = value;
   }
 
   get bgMusicPlaying() {
-      return this._bgMusicPlaying;
+    return this._bgMusicPlaying;
   }
-
 }
+
+/* eslint-enable no-underscore-dangle */

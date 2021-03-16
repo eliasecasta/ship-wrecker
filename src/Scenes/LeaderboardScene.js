@@ -1,39 +1,37 @@
-import Phaser from "phaser";
-import config from "../Config/config";
-import { getScores } from "../Config/scoresApi";
-import Button from "../Objects/Button";
-import { ScrollingBackground } from "../Entities";
+import Phaser from 'phaser';
+import config from '../Config/config';
+import { getScores } from '../Config/scoresApi';
+import Button from '../Objects/Button';
+import { ScrollingBackground } from '../Entities';
 
 export default class LeaderboardScene extends Phaser.Scene {
   constructor() {
-    super("Leaderboard");
+    super('Leaderboard');
   }
-
-  preload() {}
 
   create() {
     (async () => {
       this.backgrounds = [];
-      for (let i = 0; i < 5; i++) {
-        let keys = ["sprBg0", "sprBg1"];
-        let key = keys[Phaser.Math.Between(0, keys.length - 1)];
-        let bg = new ScrollingBackground(this, key, i * 10);
+      for (let i = 0; i < 5; i += 1) {
+        const keys = ['sprBg0', 'sprBg1'];
+        const key = keys[Phaser.Math.Between(0, keys.length - 1)];
+        const bg = new ScrollingBackground(this, key, i * 10);
         this.backgrounds.push(bg);
       }
 
       this.title = this.add.text(
         config.width / 2,
         config.height / 2 - 250,
-        "Leaderboard",
+        'Leaderboard',
         {
           fontSize: 40,
-          fontFamily: "monospace",
-        }
+          fontFamily: 'monospace',
+        },
       );
 
       this.title.setOrigin(0.5);
-      let completeLeaderboard = await getScores();
-      let orderedLeaderboard = completeLeaderboard
+      const completeLeaderboard = await getScores();
+      const orderedLeaderboard = completeLeaderboard
         .sort((a, b) => b.score - a.score)
         .slice(0, 5);
 
@@ -45,8 +43,8 @@ export default class LeaderboardScene extends Phaser.Scene {
             `#${index + 1}:  ${element.user}  ${element.score}`,
             {
               fontSize: 25,
-              fontFamily: "monospace",
-            }
+              fontFamily: 'monospace',
+            },
           )
           .setOrigin(0.5);
       });
@@ -55,10 +53,10 @@ export default class LeaderboardScene extends Phaser.Scene {
         this,
         400,
         500,
-        "blueButton1",
-        "blueButton2",
-        "Menu",
-        "Title"
+        'blueButton1',
+        'blueButton2',
+        'Menu',
+        'Title',
       );
     })();
   }

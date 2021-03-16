@@ -1,4 +1,5 @@
-import Phaser from "phaser";
+/* eslint-disable max-classes-per-file */
+import Phaser from 'phaser';
 
 class Entity extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, key, type) {
@@ -7,14 +8,14 @@ class Entity extends Phaser.GameObjects.Sprite {
     this.scene = scene;
     this.scene.add.existing(this);
     this.scene.physics.world.enableBody(this, 0);
-    this.setData("type", type);
-    this.setData("isDead", false);
+    this.setData('type', type);
+    this.setData('isDead', false);
   }
 
   explode(canDestroy) {
-    if (!this.getData("isDead")) {
-      this.setTexture("sprExplosion");
-      this.play("sprExplosion");
+    if (!this.getData('isDead')) {
+      this.setTexture('sprExplosion');
+      this.play('sprExplosion');
 
       this.scene.sfx.explosions[
         Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)
@@ -30,46 +31,55 @@ class Entity extends Phaser.GameObjects.Sprite {
       this.body.setVelocity(0, 0);
 
       this.on(
-        "animationcomplete",
-        function () {
+        'animationcomplete',
+        () => {
           if (canDestroy) {
             this.destroy();
           } else {
             this.setVisible(false);
           }
         },
-        this
+        this,
       );
 
-      this.setData("isDead", true);
+      this.setData('isDead', true);
     }
+  }
+}
+
+class PlayerLaser extends Entity {
+  constructor(scene, x, y) {
+    super(scene, x, y, 'sprLaserPlayer');
+    this.body.velocity.y = -200;
   }
 }
 
 class Player extends Entity {
   constructor(scene, x, y, key) {
-    super(scene, x, y, key, "Player");
+    super(scene, x, y, key, 'Player');
 
-    this.setData("speed", 200);
-    this.play("sprPlayer");
+    this.setData('speed', 200);
+    this.play('sprPlayer');
 
-    this.setData("isShooting", false);
-    this.setData("timerShootDelay", 10);
-    this.setData("timerShootTick", this.getData("timerShootDelay") - 1);
+    this.setData('isShooting', false);
+    this.setData('timerShootDelay', 10);
+    this.setData('timerShootTick', this.getData('timerShootDelay') - 1);
   }
+
   moveUp() {
-    this.body.velocity.y = -this.getData("speed");
+    this.body.velocity.y = -this.getData('speed');
   }
+
   moveDown() {
-    this.body.velocity.y = this.getData("speed");
+    this.body.velocity.y = this.getData('speed');
   }
 
   moveLeft() {
-    this.body.velocity.x = -this.getData("speed");
+    this.body.velocity.x = -this.getData('speed');
   }
 
   moveRight() {
-    this.body.velocity.x = this.getData("speed");
+    this.body.velocity.x = this.getData('speed');
   }
 
   update() {
@@ -77,15 +87,15 @@ class Player extends Entity {
     this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
     this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
 
-    if (this.getData("isShooting")) {
-      if (this.getData("timerShootTick") < this.getData("timerShootDelay")) {
-        this.setData("timerShootTick", this.getData("timerShootTick") + 1);
+    if (this.getData('isShooting')) {
+      if (this.getData('timerShootTick') < this.getData('timerShootDelay')) {
+        this.setData('timerShootTick', this.getData('timerShootTick') + 1);
       } else {
-        let laser = new PlayerLaser(this.scene, this.x, this.y);
+        const laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
 
         this.scene.sfx.laser.play();
-        this.setData("timerShootTick", 0);
+        this.setData('timerShootTick', 0);
       }
     }
   }
@@ -94,8 +104,8 @@ class Player extends Entity {
     this.scene.time.addEvent({
       // go to game over scene
       delay: 1000,
-      callback: function () {
-        this.scene.scene.stop().launch("GameOver");
+      callback() {
+        this.scene.scene.stop().launch('GameOver');
       },
       callbackScope: this,
       loop: false,
@@ -103,48 +113,41 @@ class Player extends Entity {
   }
 }
 
-class PlayerLaser extends Entity {
-  constructor(scene, x, y) {
-    super(scene, x, y, "sprLaserPlayer");
-    this.body.velocity.y = -200;
-  }
-}
-
 class EnemyLaser extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "sprLaserEnemy0");
+    super(scene, x, y, 'sprLaserEnemy0');
     this.body.velocity.y = 200;
   }
 }
 
 class ChaserShip extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "sprEnemy1", "ChaserShip");
+    super(scene, x, y, 'sprEnemy1', 'ChaserShip');
     this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.states = { MOVE_DOWN: "MOVE_DOWN", CHASE: "CHASE" };
+    this.states = { MOVE_DOWN: 'MOVE_DOWN', CHASE: 'CHASE' };
     this.state = this.states.MOVE_DOWN;
   }
 
   update() {
-    if (!this.getData("isDead") && this.scene.player) {
+    if (!this.getData('isDead') && this.scene.player) {
       if (
         Phaser.Math.Distance.Between(
           this.x,
           this.y,
           this.scene.player.x,
-          this.scene.player.y
+          this.scene.player.y,
         ) < 320
       ) {
         this.state = this.states.CHASE;
       }
 
-      if (this.state == this.states.CHASE) {
-        var dx = this.scene.player.x - this.x;
-        var dy = this.scene.player.y - this.y;
+      if (this.state === this.states.CHASE) {
+        const dx = this.scene.player.x - this.x;
+        const dy = this.scene.player.y - this.y;
 
-        var angle = Math.atan2(dy, dx);
+        const angle = Math.atan2(dy, dx);
 
-        var speed = 100;
+        const speed = 100;
         this.body.setVelocity(Math.cos(angle) * speed, Math.sin(angle) * speed);
       }
 
@@ -159,13 +162,13 @@ class ChaserShip extends Entity {
 
 class GunShip extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "bigShip1", "GunShip");
+    super(scene, x, y, 'bigShip1', 'GunShip');
     this.body.velocity.y = Phaser.Math.Between(50, 100);
 
     this.shootTimer = this.scene.time.addEvent({
       delay: 1000,
-      callback: function () {
-        let laser = new EnemyLaser(this.scene, this.x, this.y);
+      callback() {
+        const laser = new EnemyLaser(this.scene, this.x, this.y);
         laser.setScale(Phaser.Math.Between(1.2, 2));
         this.scene.enemyLasers.add(laser);
       },
@@ -173,7 +176,7 @@ class GunShip extends Entity {
       loop: true,
     });
 
-    this.play("sprEnemy0");
+    this.play('sprEnemy0');
   }
 
   onDestroy() {
@@ -187,9 +190,9 @@ class GunShip extends Entity {
 
 class CarrierShip extends Entity {
   constructor(scene, x, y) {
-    super(scene, x, y, "carrier1", "CarrierShip");
+    super(scene, x, y, 'carrier1', 'CarrierShip');
     this.body.velocity.y = Phaser.Math.Between(50, 100);
-    this.play("sprEnemy2");
+    this.play('sprEnemy2');
   }
 }
 
@@ -203,12 +206,12 @@ class ScrollingBackground {
   }
 
   createLayers() {
-    for (let i = 0; i < 3; i++) {
-      let layer = this.scene.add.sprite(0, 0, this.key);
+    for (let i = 0; i < 3; i += 1) {
+      const layer = this.scene.add.sprite(0, 0, this.key);
       layer.y = layer.displayHeight * i;
       layer.x = 300;
-      let flipX = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
-      let flipY = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
+      const flipX = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
+      const flipY = Phaser.Math.Between(0, 10) >= 5 ? -1 : 1;
       layer.setScale(flipX * 2, flipY * 2);
       layer.setDepth(-5 - (i - 1));
       this.scene.physics.world.enableBody(layer, 0);
@@ -220,8 +223,8 @@ class ScrollingBackground {
 
   update() {
     if (this.layers.getChildren()[0].y > 0) {
-      for (let i = 0; i < this.layers.getChildren().length; i++) {
-        let layer = this.layers.getChildren()[i];
+      for (let i = 0; i < this.layers.getChildren().length; i += 1) {
+        const layer = this.layers.getChildren()[i];
         layer.y = -layer.displayHeight + layer.displayHeight * i;
       }
     }

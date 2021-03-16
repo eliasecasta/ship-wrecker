@@ -1,17 +1,17 @@
-import { APIString } from "../Config/apiString";
-import "regenerator-runtime/runtime.js";
-import fetch from "node-fetch";
+import fetch from 'node-fetch';
+import APIString from './apiString';
+import 'regenerator-runtime/runtime';
 
 export const getScores = async () => {
   let API = APIString;
 
-  let response = "";
+  let response = '';
   let leaderboard;
   try {
     response = await fetch(API);
 
     if (response.ok === false) {
-      throw Error("Something went wrong with the Score API");
+      throw Error('Something went wrong with the Score API');
     }
 
     leaderboard = await response.json();
@@ -26,15 +26,15 @@ export const getScores = async () => {
 
 export const setScore = async (playerNameScore) => {
   let API = APIString;
-  let response = "";
+  let response = '';
   let leaderboard;
 
   const settings = {
-    method: "POST",
+    method: 'POST',
     body: JSON.stringify(playerNameScore),
     headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
   };
 
@@ -42,7 +42,7 @@ export const setScore = async (playerNameScore) => {
     response = await fetch(API, settings);
 
     if (response.ok === false) {
-      throw Error("Player name is of an incorrect format");
+      throw Error('Player name is of an incorrect format');
     }
 
     leaderboard = await response.json();
